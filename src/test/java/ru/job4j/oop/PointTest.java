@@ -36,13 +36,18 @@ public class PointTest {
     @Test
     public void when40to70then3() {
         int expected = 3;
-        int x1 = 4;
-        int y1 = 0;
-        int x2 = 7;
-        int y2 = 0;
         Point a = new Point(4, 0);
         Point b = new Point(7, 0);
         double out = a.distance(b);
+        Assert.assertEquals(expected, out, 0.01);
+    }
+
+    @Test
+    public void when112to114then2() {
+        int expected = 2;
+        Point a = new Point(1, 1, 2);
+        Point b = new Point(1, 1, 4);
+        double out = a.distance3d(b);
         Assert.assertEquals(expected, out, 0.01);
     }
 }
