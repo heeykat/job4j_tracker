@@ -85,15 +85,16 @@ public class StartUI {
     }
 
     private void showMenu() {
+        String lineSeparator = System.lineSeparator();
         System.out.println(
-                "Menu.\n" +
-                        "0. Add new Item\n" +
-                        "1. Show all items\n" +
-                        "2. Edit item\n" +
-                        "3. Delete item\n" +
-                        "4. Find item by Id\n" +
-                        "5. Find items by name\n" +
-                        "6. Exit Program\n"
+                "Menu." + lineSeparator +
+                        "0. Add new Item" + lineSeparator +
+                        "1. Show all items" + lineSeparator +
+                        "2. Edit item" + lineSeparator +
+                        "3. Delete item" + lineSeparator +
+                        "4. Find item by Id" + lineSeparator +
+                        "5. Find items by name" + lineSeparator +
+                        "6. Exit Program" + lineSeparator
         );
     }
 
