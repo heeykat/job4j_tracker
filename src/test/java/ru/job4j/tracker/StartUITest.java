@@ -130,7 +130,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenFindByIdAction(){
+    public void whenFindByIdAction() {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[]{"0", "1", "1"}
@@ -158,7 +158,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenFindByNameAction(){
+    public void whenFindByNameAction() {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[]{"0", "new item", "1"}
@@ -202,5 +202,27 @@ public class StartUITest {
         ));
     }
 
+    @Test
+    public void whenInvalidExit() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[]{"1", "0"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new ExitAction(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        assertThat(out.toString(), is(
+                String.format(
+                        "Menu." + lineSeparator
+                                + "0. === Exit program ====" + lineSeparator
+                                + "Wrong input, you can select: 0 .. 0" + lineSeparator
+                                + "Menu." + lineSeparator
+                                + "0. === Exit program ====" + lineSeparator
+                                + "=== Exit program ====" + lineSeparator
+                )
+        ));
+    }
 
 }
