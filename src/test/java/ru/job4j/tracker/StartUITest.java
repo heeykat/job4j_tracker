@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.nullValue;
@@ -10,12 +11,18 @@ public class StartUITest {
 
     public static final String lineSeparator = System.lineSeparator();
 
+    @After
+    public void after(){
+        Tracker tracker = Tracker.getInstance();
+        tracker.deleteAll();
+    }
+
     @Test
     public void whenCreate() {
         Output out = new StubOutput();
         String[] answers = {"Fix PC"};
         Input input = new StubInput(answers);
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction create = new CreateAction(out);
         create.execute(input, tracker);
         Item created = tracker.findAll()[0];
@@ -29,7 +36,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "Item name", "1"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new CreateAction(out),
                 new ExitAction(out)
@@ -44,7 +51,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "1"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new ShowAction(out),
                 new ExitAction(out)
@@ -68,7 +75,7 @@ public class StartUITest {
     @Test
     public void whenReplace() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {
@@ -84,7 +91,7 @@ public class StartUITest {
     @Test
     public void whenReplaceItem() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
         Input in = new StubInput(
@@ -101,7 +108,7 @@ public class StartUITest {
     @Test
     public void whenDelete() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {
@@ -116,7 +123,7 @@ public class StartUITest {
     @Test
     public void whenDeleteItem() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         Item item = tracker.add(new Item("Deleted item"));
         Input in = new StubInput(
                 new String[]{"0", String.valueOf(item.getId()), "1"}
@@ -135,7 +142,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "1", "1"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new FindByIdAction(out),
                 new ExitAction(out)
@@ -163,7 +170,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "new item", "1"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new FindByNameAction(out),
                 new ExitAction(out)
@@ -190,7 +197,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new ExitAction(out)
         };
@@ -208,7 +215,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"1", "0"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new ExitAction(out)
         };
@@ -224,5 +231,4 @@ public class StartUITest {
                 )
         ));
     }
-
 }
